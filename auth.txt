@@ -1,0 +1,19 @@
+# oc get pod -n openshift-authentication
+NAME                               READY   STATUS    RESTARTS   AGE
+oauth-openshift-77794b67fc-fcdsd   1/1     Running   1          7h45m
+oauth-openshift-77794b67fc-fqg2w   1/1     Running   1          5h11m
+oauth-openshift-77794b67fc-jtvdh   1/1     Running   1          7h46m
+
+# oc rsh -n openshift-authentication oauth-openshift-77794b67fc-fcdd cat /run/secrets/kubernetes.io/serviceaccount/ca.crt > /tmp/ingress-ca.em
+
+# cp /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem /etc/pki/ca-rust/extracted/pem/tls-ca-bundle.pem.bak 
+
+# cat /tmp/ingress-ca.pem >> /etc/pki/ca-trust/extracted/pem/tls-cabundle.pem 
+
+# rm ~/.kube/config 
+
+sh-4.4# oc login -u admin -p redhat https://api.ocp4.example.com:6443 
+Login successful.
+
+You have access to 74 projects, the list has been suppressed. You can list all projects with 'oc projects'
+
